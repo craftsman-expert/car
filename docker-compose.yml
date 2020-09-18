@@ -1,0 +1,95 @@
+version: "3.7"
+
+networks:
+  api:
+
+volumes:
+  audio:
+
+services:
+
+  app:
+    container_name: car.app
+    restart: always
+    image: car/app:latest
+    build:
+      context: .
+      dockerfile: ./docker/php/dev/Dockerfile
+    volumes:
+      - /var/www/epsyteam/data/car:/www
+      - /var/www/epsyteam/data/car/media:/www/media
+      - /var/www/epsyteam/data/car/docker/php/dev/usr/local/etc/php/custom.d:/usr/local/etc/php/custom.d
+    depends_on:
+      - db
+    networks:
+      - api
+    expose:
+      - 9000
+    environment:
+      PHP_INI_SCAN_DIR: ":/usr/local/etc/php/custom.d"
+      TZ: "Europe/Moscow"
+
+  db:
+    image: percona:latest
+    container_name: car.db
+    restart: always
+    networks:
+      - api
+    env_file:
+      - ./docker/mysql/.env
+    ports:
+      - 3390:3306
+      - 127.0.0.1:3391:3306
+    expose:
+      - 3306
+    environment:
+      TZ: "Europe/Moscow"
+
+  nginx-api:
+    container_name: car.nginx-api
+    restart: always
+    build:
+      context: docker/nginx/dev/nginx-api
+      dockerfile: Dockerfile
+    ports:
+      - 8500:80
+    depends_on:
+      - app
+    expose:
+      - 80
+    networks:
+      - api
+    environment:
+      TZ: "Europe/Moscow"
+
+  nginx-vue:
+    container_name: car.nginx-vue
+    restart: always
+    volumes:
+      - /var/www/epsyteam/data/car/ui:/www
+    build:
+      context: docker/nginx/dev/nginx-vue
+      dockerfile: Dockerfile
+    ports:
+      - 8600:80
+    expose:
+      - 80
+    environment:
+      TZ: "Europe/Moscow"
+
+  nginx-audio:
+    container_name: car.nginx-audio
+    restart: always
+    build:
+      context: docker/nginx/dev/nginx-audio
+      dockerfile: Dockerfile
+    volumes:
+      - /var/www/epsyteam/data/car/media/audio:/www/audio:ro
+    ports:
+      - 8700:80
+    depends_on:
+      - app
+    expose:
+      - 80
+    environment:
+      TZ: "Europe/Moscow"

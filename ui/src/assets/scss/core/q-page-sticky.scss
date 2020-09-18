@@ -1,0 +1,9 @@
+
+.bg-sticky-green {
+  //background-color: $dark;
+  background: rgba(6, 144, 196, 0.39) !important;
+  background: -moz-linear-gradient(180deg, rgba(6,144,196,1) 0%, rgba(18,175,179,0.28335084033613445) 100%, rgba(6,144,196,1) 100%) !important;;
+  background: -webkit-linear-gradient(180deg, rgba(6,144,196,1) 0%, rgba(18,175,179,0.28335084033613445) 100%, rgba(6,144,196,1) 100%) !important;;
+  background: linear-gradient(180deg, rgba(6,144,196,1) 0%, rgba(14, 118, 121, 0.65) 100%, rgba(6,144,196,1) 100%) !important;;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0690c4",endColorstr="#0690c4",GradientType=1) !important;;
+}

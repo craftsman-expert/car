@@ -1,0 +1,13 @@
+
+# Nginx
+./nginx/logs/
+
+# PHP
+./php/log/
+
+# phpMyaAmin
+./phpmyadmin/config.inc.php
+/nginx/dev/logs/nginx-admin/
+/nginx/dev/logs/nginx-api/
+/nginx/dev/logs/nginx-images/
+/redis/dev/log/

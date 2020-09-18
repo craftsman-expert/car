@@ -1,0 +1,15 @@
+
+.bg-tooltip {
+  &-seawave {
+    background: rgb(81,120,120);
+    background: -moz-radial-gradient(circle, #26a69ae0 0%, #20886d 100%);
+    background: -webkit-radial-gradient(circle, #26a69ae0 0%, #20886d 100%);
+    background: radial-gradient(circle, #26a69ae0 0%, #20886d 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#517878",endColorstr="#5a906a",GradientType=1);
+  }
+}
+
+
+.q-tooltip {
+  font-size: 14px !important;
+}
